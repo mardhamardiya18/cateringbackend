@@ -23,7 +23,6 @@ class KitchenResource extends Resource
     protected static ?string $model = Kitchen::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
     {
@@ -33,12 +32,14 @@ class KitchenResource extends Resource
                     ->schema([
                         TextInput::make('name')
                             ->required()
+                            ->string()
                             ->maxLength(255)
                             ->placeholder('Masukan nama kitchen')
                             ->autofocus(),
 
                         TextInput::make('year')
                             ->required()
+                            ->string()
                             ->maxLength(255)
                             ->placeholder('Masukan tahun berdiri'),
 
@@ -53,15 +54,14 @@ class KitchenResource extends Resource
     {
         return $table
             ->columns([
+                //
                 ImageColumn::make('photo')
                     ->size(120)
                     ->circular(),
                 TextColumn::make('name')
                     ->searchable()
                     ->alignCenter(),
-
                 TextColumn::make('year')
-                    ->searchable()
                     ->alignCenter()
             ])
             ->filters([
