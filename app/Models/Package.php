@@ -16,7 +16,7 @@ class Package extends Model
         'slug',
         'thumbnail',
         'about',
-        'is_populer',
+        'is_popular',
         'category_id',
         'city_id',
         'kitchen_id'
