@@ -17,6 +17,7 @@ class Subscription extends Model
         'email',
         'delivery_time',
         'proof',
+        'city',
         'post_code',
         'notes',
         'address',
