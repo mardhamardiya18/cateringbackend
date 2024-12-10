@@ -21,7 +21,7 @@ class TierApiResource extends JsonResource
             'quantity'  => $this->quantity,
             'duration'  => $this->duration,
             'photo'     => $this->photo,
-            'cateringPackage'   => new PackageApiResource($this->whenLoaded('package')),
+            'cateringPackage'   => new PackageApiResource($this->whenLoaded('packages')),
             'benefits'      => BenefitApiResource::collection($this->whenLoaded('benefits')),
         ];
     }

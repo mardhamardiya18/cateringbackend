@@ -19,7 +19,7 @@ class TestimonialApiResource extends JsonResource
             'name'  => $this->name,
             'photo' => $this->photo,
             'message'   => $this->message,
-            'cateringPackage'   => new PackageApiResource($this->whenLoaded('package'))
+            'cateringPackage'   => new PackageApiResource($this->whenLoaded('packages'))
         ];
     }
 }
