@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filament\Resources\SubscriptionResource;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscriptionRequest;
+use App\Http\Resources\Api\SubscriptionApiResource;
 use App\Models\Package;
 use App\Models\Subscription;
 use App\Models\Tier;
@@ -17,7 +18,9 @@ class SubscriptionController extends Controller
 
     public function store(SubscriptionRequest $request)
     {
-        $validateData = $request->validate();
+
+
+        $validateData = $request->validated();
 
         $cateringPackage = Package::find($validateData['package_id']);
 
@@ -62,9 +65,9 @@ class SubscriptionController extends Controller
 
         $bookingTransaction = Subscription::create($validateData);
 
-        $bookingTransaction->load(['packages', 'tiers']);
+        $bookingTransaction->load(['package', 'tier']);
 
-        return new SubscriptionResource($bookingTransaction);
+        return new SubscriptionApiResource($bookingTransaction);
     }
 
     public function booking_details(Request $request)
@@ -77,9 +80,9 @@ class SubscriptionController extends Controller
         $booking = Subscription::where('phone', $request->phone)
             ->where('booking_trx_id', $request->booking_trx_id)
             ->with([
-                'packages',
-                'packages.kitchen',
-                'tiers'
+                'package',
+                'package.kitchen',
+                'tier'
             ])
             ->first();
 
@@ -87,6 +90,6 @@ class SubscriptionController extends Controller
             return response()->json(['message' => 'Booking not found'], 404);
         }
 
-        return new SubscriptionResource($booking);
+        return new SubscriptionApiResource($booking);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filament\Resources\PackageResource;
+
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\PackageApiResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PackageController extends Controller
     {
         $cateringPackages = Package::with(['city', 'kitchen', 'category', 'tiers', 'tiers.benefits'])->get();
 
-        return PackageResource::collection($cateringPackages);
+        return PackageApiResource::collection($cateringPackages);
     }
 
     public function show(Package $package)
@@ -30,8 +31,8 @@ class PackageController extends Controller
             'tiers.benefits'
         ]);
 
-        $package->loadCount('packages');
+        $package->kitchen->loadCount('packages');
 
-        return new PackageResource($package);
+        return new PackageApiResource($package);
     }
 }

@@ -237,7 +237,7 @@ class SubscriptionResource extends Resource
         return $table
             ->columns([
                 //
-                ImageColumn::make('Package.thumbnail'),
+                ImageColumn::make('package.thumbnail'),
 
                 TextColumn::make('name')
                     ->searchable(),

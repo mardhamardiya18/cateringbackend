@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filament\Resources\CategoryResource;
+
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\CategoryApiResource;
+use App\Http\Resources\Api\PackageApiResource;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Package;
@@ -16,7 +18,7 @@ class CategoryController extends Controller
     {
         $categories = Category::with(['packages'])->get();
 
-        return CategoryResource::collection($categories);
+        return CategoryApiResource::collection($categories);
     }
 
     public function show(Category $category)
@@ -24,7 +26,7 @@ class CategoryController extends Controller
         $category->load(['packages', 'packages.city', 'packages.category', 'packages.tiers']);
         $category->loadCount('packages');
 
-        return new CategoryResource($category);
+        return new CategoryApiResource($category);
     }
 
     public function filterPackages(Request $request)
@@ -42,10 +44,10 @@ class CategoryController extends Controller
         }
 
         $cateringPackages = Package::where('category_id', $category->id)
-            ->where('city_id', $city)
+            ->where('city_id', $city->id)
             ->with(['city', 'kitchen', 'tiers', 'category'])
             ->get();
 
-        return Package::collection($cateringPackages);
+        return PackageApiResource::collection($cateringPackages);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filament\Resources\TestimonialResource;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\TestimonialApiResource;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -14,6 +14,6 @@ class TestimonialController extends Controller
     {
         $testimonials = Testimonial::with('packages')->get();
 
-        return TestimonialResource::collection($testimonials);
+        return TestimonialApiResource::collection($testimonials);
     }
 }

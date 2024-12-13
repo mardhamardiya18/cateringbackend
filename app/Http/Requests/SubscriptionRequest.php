@@ -31,7 +31,7 @@ class SubscriptionRequest extends FormRequest
             'started_at' => 'required|date',
             'package_id' => 'required|integer',
             'tier_id'   => 'required|integer',
-            'proof'     => 'required|file|mimes:png,jpg|max:2048'
+            'proof'     => 'required|file|mimes:png,jpg'
 
         ];
     }

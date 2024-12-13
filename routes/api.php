@@ -27,3 +27,7 @@ Route::apiResource('/testimonials', TestimonialController::class);
 
 Route::post('/booking-transaction', [SubscriptionController::class, 'store']);
 Route::post('/check-booking', [SubscriptionController::class, 'booking_details']);
+
+Route::post('/test-api', function () {
+    return response()->json(['message' => 'API hit successful']);
+});

@@ -18,8 +18,8 @@ class CityController extends Controller
 
     public function show(City $city)
     {
-        $city->load(['packages', 'category', 'tiers']);
-        $city->loadCount('package');
+        $city->load(['packages', 'packages.category', 'packages.tiers']);
+        $city->loadCount('packages');
 
         return new CityApiResource($city);
     }
